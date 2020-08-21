@@ -150,7 +150,7 @@ function createBarChartRace(data, top_n, tickDuration) {
         .attr('x', width - margin.right)
         .attr('y', height - margin.bottom - 5)
         .style('text-anchor', 'end')
-        .html(d3.timeFormat("%B %d, %Y")(time));
+        .html(d3.timeFormat("%Y/%m/%d")(time));
 
     // draw the updated graph with transitions
     function drawGraph() {
@@ -267,7 +267,7 @@ function createBarChartRace(data, top_n, tickDuration) {
         //     d3.select('.timeText').html(d3.timeFormat("%B %d, %Y")(time))
         // timeText.html(d3.timeFormat("%B %d, %Y")(time))
         // })
-        timeText.html(d3.timeFormat("%B %d, %Y")(time))
+        timeText.html(d3.timeFormat("%Y/%m/%d")(time))
 
     }
 
