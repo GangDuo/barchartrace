@@ -101,7 +101,7 @@
             loadSource: function(v) {
                 var self = this;
                 self.duration = 30;
-                self.top_n = 30;
+                self.top_n = 33;
                 self.title = `${v.year}年${v.month}月`;
                 Papa.parse(`http://192.168.0.136/race/datasets/${v.year}${v.month}.csv`, {
                         download: true,
