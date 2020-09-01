@@ -1,17 +1,25 @@
-const mysql = require('mysql')
-const connection = mysql.createConnection({
-  host: process.env.HOST,
-  port: process.env.PORT,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-})
+const moment = require('moment');
+const DailySalesWithoutTaxEveryStore = require('./DailySalesWithoutTaxEveryStore');
 
-connection.connect()
+function term() {
+  const pattern = "YYYY-MM-DD"
+  const yesterday = () => moment().subtract(1, 'days')
+  let beginDate = moment().date(1)
+  let endDate = moment()
 
-connection.query('SELECT "Hello World!" AS text', (error, results, fields) => {
-  if (error) throw error
-  console.log(results[0].text)
-})
+  if(moment().date() === 1) {
+    beginDate =  yesterday().date(1)
+    endDate = yesterday()
+  }
+  return {
+    beginDate: beginDate.format(pattern),
+    endDate: endDate.format(pattern),
+    tag: endDate.format("YYYYMM")
+  }
+}
 
-connection.end()
+(async(args) => {
+  const ins = new DailySalesWithoutTaxEveryStore()
+  await ins.fetch(args)
+  await ins.writeAsCsv({path: `${args.tag}.csv`})//
+})(term())

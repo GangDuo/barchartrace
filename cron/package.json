@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "mysql": "^2.18.1"
+    "json2csv": "^5.0.1",
+    "moment": "^2.27.0",
+    "promise-mysql": "^4.1.3"
   }
 }
