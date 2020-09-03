@@ -107,6 +107,10 @@
                         download: true,
                         header: true,
                         skipEmptyLines: true,
+                        error: function(err) {
+                            self.csv_data = ''
+                            alert(err)
+                        },
                         complete: function (results) {
                             if (Object.keys(results.data[0]).length === 3) {
                                 results.data = reshapeData(results.data)
