@@ -1,5 +1,5 @@
 const moment = require('moment');
-const DailySalesWithoutTaxEveryStore = require('./DailySalesWithoutTaxEveryStore');
+const DailySalesIncludeTaxEveryStore = require('./DailySalesIncludeTaxEveryStore');
 
 function term() {
   const pattern = "YYYY-MM-DD"
@@ -19,7 +19,7 @@ function term() {
 }
 
 (async(args) => {
-  const ins = new DailySalesWithoutTaxEveryStore()
+  const ins = new DailySalesIncludeTaxEveryStore()
   await ins.fetch(args)
   await ins.writeAsCsv({path: `${args.tag}.csv`})//
 })(term())

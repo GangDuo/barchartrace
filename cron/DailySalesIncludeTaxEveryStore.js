@@ -19,14 +19,14 @@ const getStoreNameByCode = (code) => storeNames[storeCodes.findIndex(x => x === 
 const commandText = `
   SELECT DATE_FORMAT(\`date\`, '%Y-%m-%d') AS \`date\`,
          store_code,
-         SUM(sales_without_tax) AS gross_sales_without_tax
+         SUM(sales_include_tax) AS gross_sales_include_tax
     FROM humpty_dumpty.simple_journals
    WHERE (\`date\` BETWEEN ? AND ?)
      AND (store_code IN(${stores.map(_ => '?').join(',')}))
 GROUP BY \`date\`, store_code
 ORDER BY \`date\``;
 
-class DailySalesWithoutTaxEveryStore {
+class DailySalesIncludeTaxEveryStore {
   constructor() {
     this.source = null
   }
@@ -57,7 +57,7 @@ class DailySalesWithoutTaxEveryStore {
         if(!ax.hasOwnProperty(d)) {
           ax[d] = {}
         }
-        ax[d][s] = row['gross_sales_without_tax']
+        ax[d][s] = row['gross_sales_include_tax']
         return ax
       }, {})
     } catch (e) {
@@ -131,4 +131,4 @@ class DailySalesWithoutTaxEveryStore {
   }
 }
 
-module.exports = DailySalesWithoutTaxEveryStore
+module.exports = DailySalesIncludeTaxEveryStore
